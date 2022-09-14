@@ -33,12 +33,40 @@ class GheDaChon extends Component {
             </tr>
           </thead>
           <tbody>
-            {gheDangDat.map((ghe, index) => {
+            {gheDangDat.length === 0 ? (
+              <tr>
+                <td className="text-yellow-300" colSpan="3">
+                  Đặt vé đi bạn ơi, còn chần chờ gì nữa!!!
+                </td>
+              </tr>
+            ) : (
+              gheDangDat.map((ghe, index) => {
+                return (
+                  <tr className="text-orange-300" key={index}>
+                    <td className="border border-slate-400">{ghe.soGhe}</td>
+                    <td className="border border-slate-400">
+                      {ghe.gia.toLocaleString()} VND
+                    </td>
+                    <td className="border border-slate-400">
+                      <span
+                        className="cursor-pointer text-red-600 font-bold"
+                        onClick={() => {
+                          huyVe(index);
+                        }}
+                      >
+                        X
+                      </span>{" "}
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+            {/* {gheDangDat.map((ghe, index) => {
               return (
                 <tr className="text-orange-300" key={index}>
                   <td className="border border-slate-400">{ghe.soGhe}</td>
                   <td className="border border-slate-400">
-                    {ghe.gia.toLocaleString()}
+                    {ghe.gia.toLocaleString()} VND
                   </td>
                   <td className="border border-slate-400">
                     <span
@@ -52,11 +80,11 @@ class GheDaChon extends Component {
                   </td>
                 </tr>
               );
-            })}
+            })} */}
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="2" className="border border-slate-400">
+              <td colSpan="2" className="border border-slate-400">
                 Tổng Tiền
               </td>
               <td className="border border-slate-400 text-orange-300">
@@ -64,7 +92,8 @@ class GheDaChon extends Component {
                   .reduce((tongtien, ghe) => {
                     return (tongtien += ghe.gia);
                   }, 0)
-                  .toLocaleString()}
+                  .toLocaleString()}{" "}
+                VND
               </td>
             </tr>
           </tfoot>

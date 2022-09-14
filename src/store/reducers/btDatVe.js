@@ -19,6 +19,9 @@ export const btDatVe = (state = stateDefault, { type, payload }) => {
       let veDaDatUpdate = [...state.veDangDat];
       veDaDatUpdate.splice(payload, 1);
       state.veDangDat = veDaDatUpdate;
+      if (veDaDatUpdate.length === 0) {
+        alert("Ơ, ĐỊNH KHÔNG ĐẶT GÌ THẬT À???");
+      }
       return { ...state };
     }
     default:
